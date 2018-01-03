@@ -1,0 +1,136 @@
+html {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-height: 100%;
+}
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('backsplash1.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/*** LANDING PAGE ***/
+
+.homepage {
+  overflow: hidden;
+  text-align: center;
+}
+
+.main-form {
+  margin-top: 20%;
+}
+
+.title {
+  color: #fbeee5;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  margin-bottom: 10px;
+  /*-webkit-text-stroke: 0.5px black;*/
+}
+
+/*** SIGNUP PAGE ***/
+
+.blurred-box {
+  border: 1px solid white;
+  /*margin-bottom: 40%;*/
+  margin-top: 10%;
+  margin-bottom: 5%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /*border-radius: 5px;*/
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.oauth-div {
+  margin-top: 10px;
+}
+
+/*** DEFAULTS ***/
+
+.button {
+  font-family: 'Open Sans', sans-serif;
+  padding: 4px 10px;
+  border: 1px solid white;
+  color: white;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-top: 10px;
+  border-radius: 2px;
+  background-color: transparent;
+}
+
+.button-right {
+  float: right;
+}
+
+.button:hover {
+  text-decoration: none;
+  border: 1px solid black;
+  color: black;
+}
+
+.button-danger:hover {
+  text-decoration: none;
+  border: 1px solid #96281b;
+  color: #96281b;
+}
+
+.button-success:hover {
+  text-decoration: none;
+  border: 1px solid #4daf7c;
+  color: #4daf7c;
+}
+
+.form-label {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 200;
+  color: white;
+  margin-bottom: 2px;
+  font-size: 17px;
+}
+
+.form-header {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: white;
+  font-size: 35px;
+}
+
+.form-control {
+  /*background-color: #eee6de !important;*/
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.form-control-search {
+  text-align: center !important;
+}
+
+.form-control:focus {
+  border-color: white !important;
+}
+
+.form-control:placeholder-shown {
+  color: white;
+}
+
+.error-text {
+  color: #d91e18;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+option {
+  color: black !important;
+}

@@ -1,0 +1,40 @@
+{
+  "name": "grailed",
+  "version": "1.0.0",
+  "description": "A web application to allow users to buy and sell second-hand clothing",
+  "main": "index.js",
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rocky1638/Streetwear-BuySell.git"
+  },
+  "author": "Rock Zhou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rocky1638/Streetwear-BuySell/issues"
+  },
+  "homepage": "https://github.com/rocky1638/Streetwear-BuySell#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.13.7",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "redux-form": "^7.2.0",
+    "redux-promise": "^0.5.3"
+  }
+}
