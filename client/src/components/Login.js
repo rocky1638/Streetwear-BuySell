@@ -51,7 +51,7 @@ class Login extends Component {
             href="/auth/google"
             className="btn btn-social btn-block btn-google"
           >
-            <FontAwesome class="fa fa-google" />
+            <FontAwesome className="fa fa-google" />
             Login With Google
           </a>
         </div>

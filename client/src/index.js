@@ -16,6 +16,7 @@ import Profile from './components/Profile';
 import SignUp from './components/Signup';
 import Results from './components/Results';
 import UpdateInfo from './components/UpdateInfo';
+import AddListing from './components/AddListing';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
@@ -30,6 +31,7 @@ ReactDOM.render(
           <Route path="/results" component={Results} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/profile/update_info" component={UpdateInfo} />
+          <Route exact path="/profile/add_listing" component={AddListing} />
         </Switch>
       </div>
     </BrowserRouter>

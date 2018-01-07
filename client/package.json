@@ -11,9 +11,11 @@
     }
   },
   "dependencies": {
+    "aws-sdk": "^2.176.0",
     "bootstrap": "^3.3.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-dropzone-s3-uploader": "^1.1.0",
     "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",

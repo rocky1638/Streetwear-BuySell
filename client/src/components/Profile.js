@@ -34,6 +34,9 @@ class Profile extends Component {
         <Link className="button" to="/">
           Home
         </Link>
+        <Link className="button" to="/profile/add_listing">
+          Add Listing
+        </Link>
       </div>
     );
   }

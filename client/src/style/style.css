@@ -55,6 +55,22 @@ body {
   margin-top: 10px;
 }
 
+/*** IMAGE INPUT ***/
+.image-input + .image-input-label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+
+  cursor: pointer;
+}
+
+.image-input:focus + .image-input-label,
+.image-input + .image-input-label:hover {
+  background-color: red;
+}
+
 /*** DEFAULTS ***/
 
 .button {

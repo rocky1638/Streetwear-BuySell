@@ -28,7 +28,9 @@ passport.use(
         if (existingUser) {
           return done(null, existingUser);
         }
-        new User({ googleId: profile.id }).save().then(() => done(null, user));
+        new User({ googleId: profile.id, listings: [] })
+          .save()
+          .then(() => done(null, user));
       });
     }
   )

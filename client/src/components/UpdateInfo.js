@@ -20,6 +20,7 @@ class UpdateInfo extends Component {
     const pantInseam = this.props.user.pantInseam
       ? this.props.user.pantInseam
       : '';
+
     this.props.initialize({
       name: name,
       favoriteBrand: favoriteBrand,

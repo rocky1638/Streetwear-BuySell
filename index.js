@@ -1,19 +1,86 @@
 const express = require('express');
+const multer = require('multer');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/dev');
+var multerS3 = require('multer-s3');
+const axios = require('axios');
+var fs = require('fs');
+var AWS = require('aws-sdk');
 require('./models/User'); // Make sure require statements are in correct order
+require('./models/Listing');
 require('./services/passport');
 
+const Listing = mongoose.model('listing');
+const User = mongoose.model('user');
+
 mongoose.Promise = global.Promise;
+
+// aws
+AWS.config.loadFromPath('./config/awsconfig.json');
+
+var s3 = new AWS.S3();
+
+const listingBucket = 'grailed.dev.listing.bucket';
+var myKey = 'grailed-dev-bucket-key';
+
+// s3.createBucket({ Bucket: listingBucket }, (err, data) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     params = { Bucket: listingBucket, Key: myKey, Body: 'Test' };
+//     s3.putObject(params, (err, data) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         console.log('Successfully loaded data');
+//       }
+//     });
+//   }
+// });
 
 mongoose.connect(keys.mongoURI);
 
 const app = express();
 
 app.use(bodyParser.json());
+
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: listingBucket,
+    acl: 'public-read',
+    metadata: function(req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function(req, file, cb) {
+      cb(null, Date.now().toString());
+    }
+  })
+});
+
+// REALLY BIG LISTING ROUTE
+
+app.post('/api/add_listing', upload.single('listingPicture'), (req, res) => {
+  const listingPicture = req.file.location;
+
+  const listing = new Listing({
+    brand: req.body.brand,
+    price: req.body.price,
+    listingPicture: listingPicture
+  });
+
+  listing
+    .save()
+    .then(() => Listing.findById(listing.id))
+    .then(item => {
+      res.send(item);
+    });
+});
+
+// END REALLY BIG LISTING ROUTE
 
 app.use(
   cookieSession({
@@ -25,6 +92,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app);
+// require('./routes/uploadRoutes')(app);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
