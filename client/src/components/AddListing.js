@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import brands from '../data/brands';
+import sizes from '../data/sizes';
+import categories from '../data/categories';
 import { addListing } from '../actions';
 
 const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
@@ -22,6 +24,10 @@ const FileInput = ({
 );
 
 class AddListing extends Component {
+  componentDidMount() {
+    document.body.className = 'white';
+  }
+
   renderField(field) {
     return (
       <div className="form-group">
@@ -38,15 +44,6 @@ class AddListing extends Component {
     );
   }
 
-  // renderImageField(field) {
-  //   return (
-  //     <div className="form-group">
-  //       <label className="form-label">{field.label}</label>
-  //       <input className="image-input" type={field.type} name={field.name} />
-  //     </div>
-  //   );
-  // }
-
   renderBrandDropdown(field) {
     function renderOptions(options) {
       return options.map(choice => (
@@ -62,6 +59,46 @@ class AddListing extends Component {
         <select className="form-control" type={field.type} {...field.input}>
           <option />
           {renderOptions(brands)}
+        </select>
+      </div>
+    );
+  }
+
+  renderSizeDropdown(field) {
+    function renderOptions(options) {
+      return options.map(choice => (
+        <option key={choice} value={choice}>
+          {choice}
+        </option>
+      ));
+    }
+
+    return (
+      <div className="form-group">
+        <label className="form-label">{field.label}</label>
+        <select className="form-control" type={field.type} {...field.input}>
+          <option />
+          {renderOptions(sizes)}
+        </select>
+      </div>
+    );
+  }
+
+  renderCategoryDropdown(field) {
+    function renderOptions(options) {
+      return options.map(choice => (
+        <option key={choice} value={choice}>
+          {choice}
+        </option>
+      ));
+    }
+
+    return (
+      <div className="form-group">
+        <label className="form-label">{field.label}</label>
+        <select className="form-control" type={field.type} {...field.input}>
+          <option />
+          {renderOptions(categories)}
         </select>
       </div>
     );
@@ -90,6 +127,18 @@ class AddListing extends Component {
             label="Brand"
             name="brand"
             component={this.renderBrandDropdown}
+          />
+          <Field
+            type="text"
+            label="Category"
+            name="category"
+            component={this.renderCategoryDropdown}
+          />
+          <Field
+            type="text"
+            label="Size"
+            name="size"
+            component={this.renderSizeDropdown}
           />
           <Field
             type="number"

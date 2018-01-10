@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
 class Login extends Component {
+  componentDidMount() {
+    document.body.className = 'white';
+  }
+
   renderField(field) {
     return (
       <div className="form-group">

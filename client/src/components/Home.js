@@ -5,12 +5,10 @@ import { connect } from 'react-redux';
 import { fetchItems, fetchUser } from '../actions';
 import axios from 'axios';
 
-const ROOT_URL = 'https://swapi.co/api';
-
 class Home extends Component {
   componentDidMount() {
+    document.body.className = 'home';
     axios.get('/api/current_user').then(res => {
-      console.log('res: ' + res);
       this.props.fetchUser(res);
     });
   }
@@ -29,7 +27,6 @@ class Home extends Component {
   }
 
   renderButtons() {
-    console.log('this.props.auth: ' + this.props.auth);
     switch (this.props.auth) {
       case null:
         return;
@@ -59,14 +56,10 @@ class Home extends Component {
   }
 
   onSubmit(values) {
-    axios
-      .get(`${ROOT_URL}/people/${values.term}`)
-      .then(result => {
-        this.props.fetchItems(result);
-      })
-      .then(() => {
-        this.props.history.push('/results');
-      });
+    this.props.fetchItems(() => {
+      // don't return items posted by the current user (do this)
+      this.props.history.push('/results');
+    });
   }
 
   render() {

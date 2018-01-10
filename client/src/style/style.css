@@ -4,7 +4,7 @@ html {
   min-height: 100%;
 }
 
-body {
+body.home {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url('backsplash1.jpg');
   -webkit-background-size: cover;
@@ -16,6 +16,10 @@ body {
 
   margin-left: 5%;
   margin-right: 5%;
+}
+
+body.white {
+  background-color: rgb(240, 240, 238);
 }
 
 /*** LANDING PAGE ***/
@@ -41,14 +45,15 @@ body {
 /*** SIGNUP PAGE ***/
 
 .blurred-box {
-  border: 1px solid white;
+  /* border: 1px solid white; */
   /*margin-bottom: 40%;*/
   margin-top: 10%;
   margin-bottom: 5%;
   padding-top: 20px;
   padding-bottom: 20px;
   /*border-radius: 5px;*/
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 254, 0.9);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .oauth-div {
@@ -71,13 +76,43 @@ body {
   background-color: red;
 }
 
+/** RESULTS PAGE **/
+.results-row {
+  display: block !important;
+}
+
+.result-card {
+  background-color: white;
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+  display: block;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.result-card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#result-card-image {
+  width: 200px;
+  height: 300px;
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
 /*** DEFAULTS ***/
 
 .button {
   font-family: 'Open Sans', sans-serif;
   padding: 4px 10px;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid #323333;
+  color: #323333;
   text-decoration: none;
   margin-right: 5px;
   margin-top: 10px;
@@ -110,7 +145,7 @@ body {
 .form-label {
   font-family: 'Dosis', sans-serif;
   font-weight: 200;
-  color: white;
+  color: #323333;
   margin-bottom: 2px;
   font-size: 17px;
 }
@@ -118,14 +153,14 @@ body {
 .form-header {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  color: white;
+  color: #323333;
   font-size: 35px;
 }
 
 .form-control {
   /*background-color: #eee6de !important;*/
   background-color: transparent !important;
-  color: white !important;
+  color: #323333 !important;
 }
 
 .form-control-search {
@@ -133,11 +168,11 @@ body {
 }
 
 .form-control:focus {
-  border-color: white !important;
+  border-color: #323333 !important;
 }
 
 .form-control:placeholder-shown {
-  color: white;
+  color: #323333;
 }
 
 .error-text {
@@ -147,6 +182,10 @@ body {
   font-size: 15px;
 }
 
+.title-black {
+  color: #323333;
+}
+
 option {
-  color: black !important;
+  color: #323333 !important;
 }

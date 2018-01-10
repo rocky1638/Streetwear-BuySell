@@ -1,3 +1,5 @@
+import 'jquery/src/jquery';
+import 'bootstrap/dist/js/bootstrap.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style/bootstrap-social.css';
 import './style/style.css';
@@ -17,6 +19,7 @@ import SignUp from './components/Signup';
 import Results from './components/Results';
 import UpdateInfo from './components/UpdateInfo';
 import AddListing from './components/AddListing';
+import ListingDetails from './components/ListingDetails';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
@@ -28,6 +31,7 @@ ReactDOM.render(
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/results/details/:id" component={ListingDetails} />
           <Route path="/results" component={Results} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/profile/update_info" component={UpdateInfo} />

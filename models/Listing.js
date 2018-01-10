@@ -6,15 +6,18 @@ const ListingSchema = new Schema(
     listingPicture: String,
     brand: String,
     size: String, // Choosing from options?
+    category: String,
     shoeSize: Number,
     pantSize: [Number, Number],
     price: Number,
     dateOfListing: Date,
-    status: Boolean,
-    seller: {
-      type: Schema.Types.ObjectId,
-      ref: 'user'
-    }
+    isSold: Boolean,
+    seller: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+      }
+    ]
   },
   { usePuchEach: true }
 );

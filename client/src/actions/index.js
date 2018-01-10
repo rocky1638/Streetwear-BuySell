@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { FETCH_ITEMS, FETCH_USER, UPDATE_USER, ADD_LISTING } from './types';
 
-export function fetchItems(res) {
-  return { type: FETCH_ITEMS, payload: res };
-}
+export const fetchItems = callback => dispatch => {
+  axios.get('/api/fetch_items').then(res => {
+    callback();
+    return dispatch({ type: FETCH_ITEMS, payload: res.data });
+  });
+};
 
 export const fetchUser = () => dispatch => {
   axios
@@ -26,6 +29,7 @@ export const addListing = (
   data.append('brand', brand);
   data.append('price', price);
   data.append('listingPicture', listingPicture);
+  data.append('isSold', false);
 
   axios.post('/api/add_listing', data).then(res => {
     callback();

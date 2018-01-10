@@ -47,6 +47,15 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use(
+  cookieSession({
+    maxAge: 10 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 var upload = multer({
   storage: multerS3({
     s3: s3,
@@ -69,11 +78,17 @@ app.post('/api/add_listing', upload.single('listingPicture'), (req, res) => {
   const listing = new Listing({
     brand: req.body.brand,
     price: req.body.price,
+    seller: [],
     listingPicture: listingPicture
   });
 
+  let updatedUser = req.user;
+  updatedUser.listings.push(listing);
+  listing.seller.push(updatedUser);
+
   listing
     .save()
+    .then(() => User.findByIdAndUpdate(req.user._id, updatedUser))
     .then(() => Listing.findById(listing.id))
     .then(item => {
       res.send(item);
@@ -82,17 +97,8 @@ app.post('/api/add_listing', upload.single('listingPicture'), (req, res) => {
 
 // END REALLY BIG LISTING ROUTE
 
-app.use(
-  cookieSession({
-    maxAge: 10 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-
 require('./routes/authRoutes')(app);
-// require('./routes/uploadRoutes')(app);
+require('./routes/uploadRoutes')(app);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

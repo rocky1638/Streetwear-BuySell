@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 class Profile extends Component {
   componentDidMount() {
     axios.get('/api/current_user').then(res => this.props.fetchUser(res));
+
+    document.body.className = 'white';
   }
 
   renderListings() {

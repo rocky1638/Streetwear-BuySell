@@ -31,6 +31,10 @@ class UpdateInfo extends Component {
     });
   }
 
+  componentDidMount() {
+    document.body.className = 'white';
+  }
+
   renderField(field) {
     return (
       <div className="form-group">
