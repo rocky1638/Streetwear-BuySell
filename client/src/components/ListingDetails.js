@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+/*
+* More Pictures???
+* GeoJSON proximity thing
+* Contact Seller
+*/
 
 class ListingDetails extends Component {
   constructor(props) {
@@ -11,6 +18,9 @@ class ListingDetails extends Component {
   }
 
   componentDidMount() {
+    var root = document.getElementsByTagName('html')[0];
+    root.className = 'scroll';
+
     axios
       .get('/api/fetch_item', {
         params: {
@@ -25,26 +35,44 @@ class ListingDetails extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div
-          id="listing-slideshow"
-          className="carousel slide"
-          data-ride="carousel"
-        >
-          <ol class="carousel-indicators">
-            <li
-              data-target="#listing-slideshow"
-              data-slide-to="0"
-              class="active"
-            />
-            <li data-target="#listing-slideshow" data-slide-to="1" />
-            <li data-target="#listing-slideshow" data-slide-to="2" />
-          </ol>
+    const { currentListing } = this.state;
 
-          <div className="carousel-inner">
-            <div class="item active">
-              <img src={this.state.currentListing.listingPicture} alt="" />
+    if (!currentListing.seller) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <Link to="/results">Back to results</Link>
+          <div className="col-xs-12 col-sm-10 col-sm-offset-1">
+            <div className="detail-card">
+              <div className="col-xs-12 col-sm-7">
+                <div
+                  id="detail-image"
+                  style={{
+                    backgroundImage: `url(${currentListing.listingPicture})`
+                  }}
+                />
+              </div>
+              <div className="center-block">
+                <h4>{currentListing.name}</h4>
+                <h5>
+                  <b>Brand:</b> {currentListing.brand}
+                </h5>
+                <h5>
+                  <b>Price:</b> ${currentListing.price} (CAD)
+                </h5>
+                <h5>
+                  <b>About this item:</b> {currentListing.description || 'N/A'}
+                </h5>
+                <h5>
+                  <b>Status:</b> {currentListing.isSold ? 'Sold' : 'Available'}
+                </h5>
+                <a href={`mailto:${currentListing.seller[0].email}`}>
+                  Contact Seller
+                </a>
+              </div>
             </div>
           </div>
         </div>

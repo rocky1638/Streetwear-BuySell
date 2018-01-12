@@ -4,13 +4,18 @@ import { Link } from 'react-router-dom';
 
 class Results extends Component {
   componentDidMount() {
+    var root = document.getElementsByTagName('html')[0];
+    root.className = 'scroll';
     document.body.className = 'white';
   }
 
   renderResultCards() {
     return this.props.items.map((current, index) => {
       return (
-        <Link to={`/results/details/${this.props.items[index]._id}`}>
+        <Link
+          style={{ color: '#323333' }}
+          to={`/results/details/${this.props.items[index]._id}`}
+        >
           <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <div className="result-card center-block">
               <div
@@ -21,6 +26,7 @@ class Results extends Component {
                   })`
                 }}
               />
+              <p>{this.props.items[index].name}</p>
               <p>{this.props.items[index].brand}</p>
               <p>{this.props.items[index].price}$</p>
             </div>
@@ -40,8 +46,11 @@ class Results extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <h3 className="title title-black">Grails Near You:</h3>
-          <h5>Refine search:</h5>
+          <div className="col-xs-12">
+            <h3 className="title title-black">Grails Near You:</h3>
+            <Link to="/">Search again</Link>
+          </div>
+
           {this.renderResultCards()}
         </div>
       </div>

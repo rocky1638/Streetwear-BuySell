@@ -19,7 +19,6 @@ class Home extends Component {
         <input
           className="form-control form-control-search"
           type="text"
-          // placeholder="Search for Supreme, Bape, Balenciaga..."
           {...field.input}
         />
       </div>
@@ -33,10 +32,10 @@ class Home extends Component {
       case false:
         return (
           <div className="col-xs-12">
-            <Link to="/signup" className="button button-right">
+            <Link to="/signup" className="button-home button-right">
               Sign Up
             </Link>
-            <Link to="/login" className="button button-right">
+            <Link to="/login" className="button-home button-right">
               Login
             </Link>
           </div>
@@ -44,10 +43,10 @@ class Home extends Component {
       default:
         return (
           <div className="col-xs-12">
-            <a href="/api/logout" className="button button-right">
+            <a href="/api/logout" className="button-home button-right">
               Logout
             </a>
-            <Link to="/profile" className="button button-right">
+            <Link to="/profile" className="button-home button-right">
               My Profile
             </Link>
           </div>
@@ -56,7 +55,11 @@ class Home extends Component {
   }
 
   onSubmit(values) {
-    this.props.fetchItems(() => {
+    const params = {
+      q: values.q
+    };
+
+    this.props.fetchItems(params, () => {
       // don't return items posted by the current user (do this)
       this.props.history.push('/results');
     });
@@ -77,7 +80,10 @@ class Home extends Component {
         <div className="row">
           <div className="col-xs-12">
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-              <Field name="term" component={this.renderSearchField} />
+              <Field name="q" component={this.renderSearchField} />
+              <button type="submit" className="button-home">
+                Search by brand
+              </button>
             </form>
           </div>
         </div>

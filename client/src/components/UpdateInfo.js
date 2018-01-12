@@ -8,18 +8,13 @@ import sizes from '../data/sizes';
 
 class UpdateInfo extends Component {
   componentWillMount() {
-    const name = this.props.user.name ? this.props.user.name : '';
-    const favoriteBrand = this.props.user.favoriteBrand
-      ? this.props.user.favoriteBrand
-      : '';
-    const size = this.props.user.size ? this.props.user.size : '';
-    const shoeSize = this.props.user.shoeSize ? this.props.user.shoeSize : '';
-    const pantWaist = this.props.user.pantWaist
-      ? this.props.user.pantWaist
-      : '';
-    const pantInseam = this.props.user.pantInseam
-      ? this.props.user.pantInseam
-      : '';
+    const { user } = this.props;
+    const name = user.name ? user.name : '';
+    const favoriteBrand = user.favoriteBrand ? user.favoriteBrand : '';
+    const size = user.size ? user.size : '';
+    const shoeSize = user.shoeSize ? user.shoeSize : '';
+    const pantWaist = user.pantWaist ? user.pantWaist : '';
+    const pantInseam = user.pantInseam ? user.pantInseam : '';
 
     this.props.initialize({
       name: name,
@@ -107,6 +102,12 @@ class UpdateInfo extends Component {
             type="text"
             label="Name"
             name="name"
+            component={this.renderField}
+          />
+          <Field
+            type="email"
+            label="Email Address"
+            name="email"
             component={this.renderField}
           />
           <Field

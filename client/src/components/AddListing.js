@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import brands from '../data/brands';
 import sizes from '../data/sizes';
 import categories from '../data/categories';
+import colors from '../data/colors';
 import { addListing } from '../actions';
 
 const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
@@ -56,7 +57,12 @@ class AddListing extends Component {
     return (
       <div className="form-group">
         <label className="form-label">{field.label}</label>
-        <select className="form-control" type={field.type} {...field.input}>
+        <select
+          size="7"
+          className="form-control"
+          type={field.type}
+          {...field.input}
+        >
           <option />
           {renderOptions(brands)}
         </select>
@@ -104,8 +110,28 @@ class AddListing extends Component {
     );
   }
 
+  renderColorDropdown(field) {
+    function renderOptions(options) {
+      return options.map(choice => (
+        <option key={choice} value={choice}>
+          {choice}
+        </option>
+      ));
+    }
+
+    return (
+      <div className="form-group">
+        <label className="form-label">{field.label}</label>
+        <select className="form-control" type={field.type} {...field.input}>
+          <option />
+          {renderOptions(colors)}
+        </select>
+      </div>
+    );
+  }
+
   onSubmit(values) {
-    console.log(values.listingPicture);
+    console.log(values);
     this.props.addListing(values, () => {
       this.props.history.push('/profile');
     });
@@ -124,6 +150,12 @@ class AddListing extends Component {
         >
           <Field
             type="text"
+            label="Name"
+            name="name"
+            component={this.renderField}
+          />
+          <Field
+            type="text"
             label="Brand"
             name="brand"
             component={this.renderBrandDropdown}
@@ -136,14 +168,32 @@ class AddListing extends Component {
           />
           <Field
             type="text"
+            label="Color"
+            name="color"
+            component={this.renderColorDropdown}
+          />
+          <Field
+            type="text"
             label="Size"
             name="size"
             component={this.renderSizeDropdown}
           />
           <Field
             type="number"
+            label="Shoe Size (if applicable)"
+            name="shoeSize"
+            component={this.renderField}
+          />
+          <Field
+            type="number"
             label="Price (CAD)"
             name="price"
+            component={this.renderField}
+          />
+          <Field
+            type="text"
+            label="About this item"
+            name="description"
             component={this.renderField}
           />
           <Field name="listingPicture" component={FileInput} />
@@ -158,6 +208,8 @@ class AddListing extends Component {
     );
   }
 }
+
+// DO FORM VALIDATION!!!
 
 function mapStateToProps(state) {
   return {

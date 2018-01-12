@@ -79,7 +79,12 @@ app.post('/api/add_listing', upload.single('listingPicture'), (req, res) => {
     brand: req.body.brand,
     price: req.body.price,
     seller: [],
-    listingPicture: listingPicture
+    listingPicture: listingPicture,
+    isSold: false,
+    category: req.body.category,
+    color: req.body.color,
+    name: req.body.name,
+    description: req.body.description
   });
 
   let updatedUser = req.user;

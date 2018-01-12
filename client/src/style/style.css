@@ -1,5 +1,11 @@
-html {
+html.scroll {
   overflow-y: scroll;
+  overflow-x: hidden;
+  min-height: 100%;
+}
+
+html.noscroll {
+  overflow-y: hidden;
   overflow-x: hidden;
   min-height: 100%;
 }
@@ -47,7 +53,7 @@ body.white {
 .blurred-box {
   /* border: 1px solid white; */
   /*margin-bottom: 40%;*/
-  margin-top: 10%;
+  margin-top: 5%;
   margin-bottom: 5%;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -84,6 +90,7 @@ body.white {
 .result-card {
   background-color: white;
   text-align: center;
+  margin-bottom: 4%;
   width: 100%;
   padding-top: 10px;
   display: block;
@@ -99,6 +106,59 @@ body.white {
 #result-card-image {
   width: 200px;
   height: 300px;
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/** LISTING DETAILS **/
+.detail-card {
+  background-color: white;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  min-height: 80vh;
+  padding: 20px 20px 20px 20px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  display: block;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#detail-image {
+  width: 100%;
+  height: 65vh;
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.detail-card-long {
+  background-color: white;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  min-height: 10vh;
+  padding: 5px 20px 5px 5px;
+  margin-top: 2%;
+  display: block !important;
+  vertical-align: middle;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.detail-card-long:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#detail-image-small {
+  width: 50px;
+  height: 50px;
   background-size: cover;
   background-repeat: none;
   background-position: center;
@@ -142,6 +202,24 @@ body.white {
   color: #4daf7c;
 }
 
+.button-home {
+  font-family: 'Open Sans', sans-serif;
+  padding: 4px 10px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-top: 10px;
+  border-radius: 2px;
+  background-color: transparent;
+}
+
+.button-home:hover {
+  text-decoration: none;
+  border: 1px solid black;
+  color: black;
+}
+
 .form-label {
   font-family: 'Dosis', sans-serif;
   font-weight: 200;
@@ -160,15 +238,20 @@ body.white {
 .form-control {
   /*background-color: #eee6de !important;*/
   background-color: transparent !important;
-  color: #323333 !important;
+  color: #323333;
 }
 
 .form-control-search {
   text-align: center !important;
+  color: #fff !important;
+}
+
+.form-control-search:focus {
+  border-color: #fff !important;
 }
 
 .form-control:focus {
-  border-color: #323333 !important;
+  border-color: #323333;
 }
 
 .form-control:placeholder-shown {
@@ -184,6 +267,14 @@ body.white {
 
 .title-black {
   color: #323333;
+}
+
+.center-block {
+  display: table;
+}
+
+.center-text {
+  text-align: center;
 }
 
 option {
