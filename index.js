@@ -19,7 +19,7 @@ const User = mongoose.model('user');
 mongoose.Promise = global.Promise;
 
 // aws
-AWS.config.loadFromPath('./config/awsconfig.json');
+AWS.config.update(require('./config/aws.js'));
 
 var s3 = new AWS.S3();
 
