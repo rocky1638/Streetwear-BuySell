@@ -4,7 +4,8 @@ import {
   FETCH_USER,
   UPDATE_USER,
   ADD_LISTING,
-  FETCH_USER_ITEMS
+  FETCH_USER_ITEMS,
+  DELETE_LISTING
 } from './types';
 
 export const fetchItems = (params, callback) => dispatch => {
@@ -38,8 +39,31 @@ export const fetchUserItems = () => dispatch => {
   });
 };
 
+export const deleteListing = (id, callback) => dispatch => {
+  axios
+    .get('/api/delete_listing', {
+      params: {
+        id: id
+      }
+    })
+    .then(res => {
+      callback();
+      return dispatch({ type: DELETE_LISTING, payload: res.data }); // REMEMBER TO RETURN UPDATED LIST OF USER ITEMS
+    });
+};
+
 export const addListing = (
-  { brand, price, listingPicture, category, color, name, description },
+  {
+    brand,
+    price,
+    listingPicture,
+    category,
+    color,
+    name,
+    description,
+    size,
+    shoeSize
+  },
   callback
 ) => dispatch => {
   let data = new FormData();
@@ -51,6 +75,8 @@ export const addListing = (
   data.append('color', color);
   data.append('name', name);
   data.append('description', description);
+  data.append('size', size);
+  data.append('shoeSize', shoeSize);
 
   console.log(data);
 

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const keys = require('./config/dev');
+const keys = require('./config/keys');
 var multerS3 = require('multer-s3');
 const axios = require('axios');
 var fs = require('fs');
@@ -84,7 +84,9 @@ app.post('/api/add_listing', upload.single('listingPicture'), (req, res) => {
     category: req.body.category,
     color: req.body.color,
     name: req.body.name,
-    description: req.body.description
+    description: req.body.description,
+    size: req.body.size === undefined ? req.body.size : '',
+    shoeSize: req.body.shoeSize === undefined ? req.body.shoeSize : 0
   });
 
   let updatedUser = req.user;
@@ -104,6 +106,17 @@ app.post('/api/add_listing', upload.single('listingPicture'), (req, res) => {
 
 require('./routes/authRoutes')(app);
 require('./routes/uploadRoutes')(app);
+
+if (process.env.NODE_ENV == 'production') {
+  // Express needs to serve up production assets like main.js
+  app.use(express.static('client/build'));
+
+  // Express needs to give index.html if it doesn't recognize the route
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'html'));
+  });
+}
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

@@ -1,9 +1,11 @@
-import { FETCH_USER_ITEMS } from '../actions/types';
+import { FETCH_USER_ITEMS, DELETE_LISTING } from '../actions/types';
 
 export default function(state = [], action) {
   switch (action.type) {
     case FETCH_USER_ITEMS:
-      return [...state, action.payload];
+      return action.payload;
+    case DELETE_LISTING:
+      return action.payload;
     default:
       return state;
   }

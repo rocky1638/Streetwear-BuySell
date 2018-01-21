@@ -35,4 +35,22 @@ module.exports = app => {
         res.send(user.listings);
       });
   });
+
+  // THIS IS WHERE I LEFT OFF
+  app.get('/api/delete_listing', (req, res) => {
+    const { id } = req.user;
+    const listingId = req.query.id;
+
+    Listing.findByIdAndRemove(listingId).then(() => {
+      User.findByIdAndUpdate(id, { $pull: { listings: listingId } }).then(
+        () => {
+          User.findById(id)
+            .populate('listings')
+            .then(user => {
+              res.send(user.listings);
+            });
+        }
+      );
+    });
+  });
 };

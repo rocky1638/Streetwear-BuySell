@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { deleteListing } from '../actions';
 
 /*
 * More Pictures???
@@ -34,6 +36,42 @@ class ListingDetails extends Component {
       });
   }
 
+  handleDeleteListing() {
+    this.props.deleteListing(this.state.currentListing._id, () => {
+      this.props.history.push('/profile');
+    });
+  }
+
+  renderContact() {
+    if (!this.props.auth) {
+      <a
+        className="contact-button"
+        href={`mailto:${this.state.currentListing.seller[0].email}`}
+      >
+        Contact Seller
+      </a>;
+    } else if (
+      this.props.auth._id === this.state.currentListing.seller[0]._id
+    ) {
+      return (
+        <button
+          className="delete-button"
+          onClick={this.handleDeleteListing.bind(this)}
+        >
+          Delete Listing
+        </button>
+      );
+    }
+    return (
+      <a
+        className="contact-button"
+        href={`mailto:${this.state.currentListing.seller[0].email}`}
+      >
+        Contact Seller
+      </a>
+    );
+  }
+
   render() {
     const { currentListing } = this.state;
 
@@ -44,7 +82,6 @@ class ListingDetails extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <Link to="/results">Back to results</Link>
           <div className="col-xs-12 col-sm-10 col-sm-offset-1">
             <div className="detail-card">
               <div className="col-xs-12 col-sm-7">
@@ -56,7 +93,9 @@ class ListingDetails extends Component {
                 />
               </div>
               <div className="center-block">
-                <h4>{currentListing.name}</h4>
+                <h4>
+                  <b>{currentListing.name}</b>
+                </h4>
                 <h5>
                   <b>Brand:</b> {currentListing.brand}
                 </h5>
@@ -64,14 +103,19 @@ class ListingDetails extends Component {
                   <b>Price:</b> ${currentListing.price} (CAD)
                 </h5>
                 <h5>
+                  <b>Size: </b>
+                  {currentListing.size ||
+                    currentListing.shoeSize ||
+                    currentListing.pantSize ||
+                    'N/A'}
+                </h5>
+                <h5>
                   <b>About this item:</b> {currentListing.description || 'N/A'}
                 </h5>
                 <h5>
                   <b>Status:</b> {currentListing.isSold ? 'Sold' : 'Available'}
                 </h5>
-                <a href={`mailto:${currentListing.seller[0].email}`}>
-                  Contact Seller
-                </a>
+                {this.renderContact()}
               </div>
             </div>
           </div>
@@ -81,4 +125,8 @@ class ListingDetails extends Component {
   }
 }
 
-export default ListingDetails;
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps, { deleteListing })(ListingDetails);

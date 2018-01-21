@@ -17,7 +17,7 @@ module.exports = app => {
       if (req.user.email) {
         res.redirect('/profile');
       } else {
-        res.redirect('/profile/update_user');
+        res.redirect('/profile/update_info');
       }
     }
   );

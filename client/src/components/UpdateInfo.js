@@ -8,22 +8,27 @@ import sizes from '../data/sizes';
 
 class UpdateInfo extends Component {
   componentWillMount() {
-    const { user } = this.props;
-    const name = user.name ? user.name : '';
-    const favoriteBrand = user.favoriteBrand ? user.favoriteBrand : '';
-    const size = user.size ? user.size : '';
-    const shoeSize = user.shoeSize ? user.shoeSize : '';
-    const pantWaist = user.pantWaist ? user.pantWaist : '';
-    const pantInseam = user.pantInseam ? user.pantInseam : '';
+    if (this.props.user) {
+      const { user } = this.props;
+      const name = user.name ? user.name : '';
+      const favoriteBrand = user.favoriteBrand ? user.favoriteBrand : '';
+      const size = user.size ? user.size : '';
+      const shoeSize = user.shoeSize ? user.shoeSize : '';
+      const pantWaist = user.pantWaist ? user.pantWaist : '';
+      const pantInseam = user.pantInseam ? user.pantInseam : '';
+      const email = user.email ? user.email : '';
 
-    this.props.initialize({
-      name: name,
-      favoriteBrand: favoriteBrand,
-      size: size,
-      shoeSize: shoeSize,
-      pantWaist: pantWaist,
-      pantInseam: pantInseam
-    });
+      this.props.initialize({
+        name: name,
+        favoriteBrand: favoriteBrand,
+        size: size,
+        shoeSize: shoeSize,
+        pantWaist: pantWaist,
+        pantInseam: pantInseam,
+        email: email
+      });
+    }
+    console.log('logging in...');
   }
 
   componentDidMount() {

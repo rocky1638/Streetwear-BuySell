@@ -16,7 +16,9 @@ class Profile extends Component {
   }
 
   renderListings() {
-    return <ProfileListing listing={this.props.userItems[0]} />;
+    return this.props.userItems.map((current, index) => {
+      return <ProfileListing key={current._id} listing={current} />;
+    });
   }
 
   render() {
@@ -26,23 +28,24 @@ class Profile extends Component {
 
     return (
       <div className="container-fluid">
-        <div className="row">
+        <div className="row nunito">
           <div className="col-xs-12 col-sm-10 col-sm-offset-1 center-text">
-            <h2 className="form-header">Profile Page</h2>
-            <p>{this.props.user.googleId}</p>
+            <h2 className="form-header">My Account</h2>
             <p>{this.props.user.name}</p>
-            <p>{this.props.user.favoriteBrand}</p>
+            <p>Favorite Brand: {this.props.user.favoriteBrand}</p>
+            <div className="button-div">
+              <Link className="button" to="/profile/update_info">
+                Update Info
+              </Link>
+              <Link className="button" to="/">
+                Home
+              </Link>
+              <Link className="button" to="/profile/add_listing">
+                Add Listing
+              </Link>
+            </div>
             <h3 className="form-header">My Listings</h3>
             <div>{this.renderListings()}</div>
-            <Link className="button" to="/profile/update_info">
-              Update Info
-            </Link>
-            <Link className="button" to="/">
-              Home
-            </Link>
-            <Link className="button" to="/profile/add_listing">
-              Add Listing
-            </Link>
           </div>
         </div>
       </div>
