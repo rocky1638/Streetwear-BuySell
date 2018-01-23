@@ -36,7 +36,6 @@ module.exports = app => {
       });
   });
 
-  // THIS IS WHERE I LEFT OFF
   app.get('/api/delete_listing', (req, res) => {
     const { id } = req.user;
     const listingId = req.query.id;

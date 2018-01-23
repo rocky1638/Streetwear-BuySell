@@ -33,9 +33,9 @@ ReactDOM.render(
           <Route path="/signup" component={SignUp} />
           <Route path="/results/details/:id" component={ListingDetails} />
           <Route path="/results" component={Results} />
-          <Route exact path="/profile" component={Profile} />
           <Route exact path="/profile/update_info" component={UpdateInfo} />
           <Route exact path="/profile/add_listing" component={AddListing} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </div>
     </BrowserRouter>
